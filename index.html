@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PM琢玉 — 供应链产品经理</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, "SF Pro Display", "SF Pro Text", "Helvetica Neue", "PingFang SC", "Microsoft YaHei", sans-serif;
+            background-color: #f5f5f7;
+            color: #1d1d1f;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            line-height: 1.47059;
+            letter-spacing: -0.022em;
+        }
+
+        /* === Navigation === */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            background: rgba(245, 245, 247, 0.8);
+            backdrop-filter: saturate(180%) blur(20px);
+            -webkit-backdrop-filter: saturate(180%) blur(20px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+        }
+
+        .nav-inner {
+            max-width: 980px;
+            margin: 0 auto;
+            padding: 0 22px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nav-logo {
+            font-size: 14px;
+            font-weight: 600;
+            color: #1d1d1f;
+            letter-spacing: -0.01em;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-size: 12px;
+            font-weight: 400;
+            color: #1d1d1f;
+            text-decoration: none;
+            opacity: 0.8;
+            transition: opacity 0.2s;
+        }
+
+        .nav-links a:hover {
+            opacity: 1;
+        }
+
+        /* === Hero === */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 120px 24px 80px;
+            background: linear-gradient(180deg, #f5f5f7 0%, #ffffff 100%);
+        }
+
+        .hero-chip {
+            display: inline-block;
+            font-size: 12px;
+            font-weight: 500;
+            letter-spacing: 0.08em;
+            color: #6e6e73;
+            background: rgba(0, 0, 0, 0.04);
+            padding: 6px 16px;
+            border-radius: 100px;
+            margin-bottom: 28px;
+            text-transform: uppercase;
+        }
+
+        .hero h1 {
+            font-size: 56px;
+            font-weight: 700;
+            line-height: 1.07143;
+            letter-spacing: -0.005em;
+            color: #1d1d1f;
+            margin-bottom: 12px;
+        }
+
+        .hero h1 .highlight {
+            display: inline-block;
+            background: linear-gradient(135deg, #007AFF, #5856D6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero h2, .typewriter {
+            font-size: 20px;
+            font-weight: 400;
+            line-height: 1.14286;
+            letter-spacing: 0.004em;
+            color: #6e6e73;
+            max-width: 640px;
+            margin: 0 auto 16px;
+            margin-top: 24px;
+        }
+
+        .typewriter {
+            font-weight: 400;
+            line-height: 1.14286;
+            letter-spacing: 0.004em;
+            color: #6e6e73;
+            max-width: 640px;
+            margin: 0 auto 16px;
+            min-height: 2em;
+        }
+
+        .typewriter .cursor {
+            display: inline-block;
+            width: 2px;
+            height: 1.1em;
+            background: #007AFF;
+            margin-left: 2px;
+            vertical-align: text-bottom;
+            animation: blink 0.8s step-end infinite;
+        }
+
+        .typewriter .cursor.done {
+            animation: blink 1.2s step-end infinite;
+            opacity: 0.6;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        .hero-tags {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 32px;
+        }
+
+        .hero-tags span {
+            font-size: 12px;
+            font-weight: 500;
+            color: #6e6e73;
+            background: rgba(0, 0, 0, 0.04);
+            padding: 4px 12px;
+            border-radius: 100px;
+        }
+
+        /* === Scroll indicator === */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 32px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            opacity: 0.4;
+        }
+
+        .scroll-indicator .mouse {
+            width: 18px;
+            height: 28px;
+            border: 2px solid #6e6e73;
+            border-radius: 10px;
+            position: relative;
+        }
+
+        .scroll-indicator .mouse::after {
+            content: '';
+            position: absolute;
+            top: 6px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 3px;
+            height: 6px;
+            background: #6e6e73;
+            border-radius: 2px;
+            animation: scrollAnim 2s ease-in-out infinite;
+        }
+
+        @keyframes scrollAnim {
+            0%, 100% { opacity: 1; transform: translateX(-50%) translateY(0); }
+            50% { opacity: 0.3; transform: translateX(-50%) translateY(6px); }
+        }
+
+        /* === Sections (Apple-style) === */
+        .section {
+            max-width: 980px;
+            margin: 0 auto;
+            padding: 100px 22px;
+        }
+
+        .section-title {
+            font-size: 40px;
+            font-weight: 700;
+            line-height: 1.1;
+            letter-spacing: -0.003em;
+            color: #1d1d1f;
+            margin-bottom: 12px;
+        }
+
+        .section-subtitle {
+            font-size: 21px;
+            font-weight: 400;
+            line-height: 1.381;
+            color: #6e6e73;
+            margin-bottom: 56px;
+        }
+
+        /* === Grid Cards (Apple-style) === */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+
+        .card {
+            background: #ffffff;
+            border-radius: 18px;
+            padding: 32px;
+            transition: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
+            cursor: default;
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+        }
+
+        .card-icon {
+            font-size: 20px;
+            margin-bottom: 12px;
+            color: #007AFF;
+        }
+
+        .card h3 {
+            font-size: 17px;
+            font-weight: 600;
+            color: #1d1d1f;
+            margin-bottom: 8px;
+        }
+
+        .card p {
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 1.47059;
+            color: #6e6e73;
+        }
+
+        .card .meta {
+            font-size: 11px;
+            font-weight: 500;
+            color: #86868b;
+            margin-top: 12px;
+        }
+
+        /* === Timeline === */
+        .timeline {
+            position: relative;
+            padding-left: 24px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 7px;
+            top: 8px;
+            bottom: 8px;
+            width: 1px;
+            background: #d2d2d7;
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-bottom: 40px;
+        }
+
+        .timeline-item:last-child {
+            padding-bottom: 0;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -21px;
+            top: 8px;
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: #007AFF;
+            border: 2px solid #fff;
+            box-shadow: 0 0 0 1px #007AFF;
+        }
+
+        .timeline-item h3 {
+            font-size: 17px;
+            font-weight: 600;
+            color: #1d1d1f;
+            margin-bottom: 2px;
+        }
+
+        .timeline-item .company {
+            font-size: 14px;
+            font-weight: 400;
+            color: #6e6e73;
+            margin-bottom: 4px;
+        }
+
+        .timeline-item .period {
+            font-size: 12px;
+            font-weight: 400;
+            color: #86868b;
+            margin-bottom: 8px;
+        }
+
+        .timeline-item p {
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 1.47059;
+            color: #6e6e73;
+        }
+
+        /* === Footer === */
+        .footer {
+            text-align: center;
+            padding: 32px 22px;
+            border-top: 1px solid #d2d2d7;
+            max-width: 980px;
+            margin: 0 auto;
+        }
+
+        .footer p {
+            font-size: 12px;
+            font-weight: 400;
+            color: #86868b;
+        }
+
+        /* === Animations === */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* === Responsive === */
+        @media (max-width: 734px) {
+            .hero h1 {
+                font-size: 36px;
+            }
+            .hero h2 {
+                font-size: 21px;
+            }
+            .section-title {
+                font-size: 28px;
+            }
+            .section-subtitle {
+                font-size: 17px;
+            }
+            .grid {
+                grid-template-columns: 1fr;
+            }
+            .nav-links {
+                gap: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-inner">
+            <div class="nav-logo">PM琢玉</div>
+            <ul class="nav-links">
+                <li><a href="#about">关于</a></li>
+                <li><a href="#vibecoding">Vibe Coding</a></li>
+                <li><a href="#spa">SPA小项目</a></li>
+                <li><a href="#articles">文章动态</a></li>
+                <li><a href="#contact">联系</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-chip">产品经理 · 供应链</div>
+        <h1>
+            Hello，我是<span class="highlight">PM琢玉</span>
+        </h1>
+        <h2 id="typewriter" class="typewriter"></h2>
+        <div class="hero-tags">
+            <span>供应链</span>
+            <span>中台</span>
+            <span>AI</span>
+            <span>零售科技</span>
+            <span>WMS · OMS · ERP</span>
+        </div>
+        <div class="scroll-indicator">
+            <div class="mouse"></div>
+        </div>
+    </section>
+
+    <!-- About -->
+    <section id="about" class="section fade-in">
+        <h2 class="section-title">关于我</h2>
+        <p class="section-subtitle">4 年 B 端与 C 端产品经验，深耕供应链领域。</p>
+        <div class="grid">
+            <div class="card">
+                <div class="card-icon">🎯</div>
+                <h3>领域深耕</h3>
+                <p>熟悉进销存、ERP、WMS、OMS 等供应链核心系统，理解商品管理、采购分销、履约仓储、新零售等业务模块的完整链路与产品特性。</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">🏗️</div>
+                <h3>0-1-N 全周期</h3>
+                <p>深度参与并主导多个大型项目的完整产研流程，覆盖中免集团 200 万+ SKU 商品中心、全渠道业务中台、WMS 智能仓储等关键项目。</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">🤖</div>
+                <h3>AI 实践者</h3>
+                <p>日常使用 AI IDE 搭建项目结构、迭代产品文档、产出原型 demo。持续探索 AI 在供应链场景中的落地可能。</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">👥</div>
+                <h3>团队推动</h3>
+                <p>担任项目经理带领 7 人团队完成千万级项目交付，具备出色的跨部门沟通与多方协调能力。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Vibe Coding -->
+    <section id="vibecoding" class="section fade-in">
+        <h2 class="section-title">Vibe Coding</h2>
+        <p class="section-subtitle">用 AI 写代码、搭项目，分享实践中的思考与产出。</p>
+        <div class="grid">
+            <div class="card">
+                <div class="card-icon">🎨</div>
+                <h3>pmzhuoyu.com</h3>
+                <p>从 0 搭建个人网站，Apple 风格 UI，打字机动画，AI 辅助全流程开发。</p>
+                <div class="meta">HTML · CSS · JS · AI IDE</div>
+            </div>
+            <div class="card">
+                <div class="card-icon">🛠️</div>
+                <h3>AI 产品原型加速器</h3>
+                <p>借助 Cursor + Claude 快速产出高保真原型与 PRD，将产品设计效率提升 3 倍以上。</p>
+                <div class="meta">Prompt · 迭代 · 落地</div>
+            </div>
+            <div class="card">
+                <div class="card-icon">⚡</div>
+                <h3>供应链数据看板</h3>
+                <p>用 AI 辅助搭建库存可视化看板，连接数据库实时展示核心指标。</p>
+                <div class="meta">SQL · 可视化 · 实时</div>
+            </div>
+            <div class="card">
+                <div class="card-icon">🧪</div>
+                <h3>更多探索中</h3>
+                <p>持续尝试用 AI 重构产品工作流，探索 AI 在供应链场景中的落地可能。</p>
+                <div class="meta">持续更新 · 敬请期待</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SPA小项目 -->
+    <section id="spa" class="section fade-in">
+        <h2 class="section-title">SPA小项目</h2>
+        <p class="section-subtitle">用 AI 快速构建的单页应用，小而美的 Side Project。</p>
+        <div class="grid">
+            <div class="card">
+                <div class="card-icon">📝</div>
+                <h3>待添加</h3>
+                <p>SPA 小项目正在规划中，后续会用 AI 快速搭建并发布在这里。</p>
+                <div class="meta">Coming Soon</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 文章动态 -->
+    <section id="articles" class="section fade-in">
+        <h2 class="section-title">文章动态</h2>
+        <p class="section-subtitle">产品思考、AI 实践、供应链干货。</p>
+        <div class="grid">
+            <div class="card">
+                <div class="card-icon">✍️</div>
+                <h3>首篇文章即将发布</h3>
+                <p>用 AI 重新定义产品经理的工作方式——这是我的第一篇文章，敬请期待。</p>
+                <div class="meta">Coming Soon</div>
+            </div>
+        </div>
+    </section>
+    <section id="contact" class="section fade-in">
+        <h2 class="section-title">联系我</h2>
+        <p class="section-subtitle" style="margin-bottom: 24px;">
+            正在寻找新的机会。如果您有供应链产品方向的岗位，欢迎联系。
+        </p>
+        <div style="display: flex; gap: 24px; justify-content: center; flex-wrap: wrap;">
+            <div class="card" style="min-width: 200px; text-align: center; padding: 24px;">
+                <div style="font-size: 13px; font-weight: 500; color: #6e6e73; margin-bottom: 4px;">邮箱</div>
+                <div style="font-size: 15px; font-weight: 500; color: #1d1d1f;">liao_1997@foxmail.com</div>
+            </div>
+            <div class="card" style="min-width: 200px; text-align: center; padding: 24px;">
+                <div style="font-size: 13px; font-weight: 500; color: #6e6e73; margin-bottom: 4px;">手机</div>
+                <div style="font-size: 15px; font-weight: 500; color: #1d1d1f;">188-3898-1575</div>
+            </div>
+            <div class="card" style="min-width: 200px; text-align: center; padding: 24px;">
+                <div style="font-size: 13px; font-weight: 500; color: #6e6e73; margin-bottom: 4px;">所在地</div>
+                <div style="font-size: 15px; font-weight: 500; color: #1d1d1f;">北京 · 在职 · 两周内到岗</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>© 2026 PM琢玉 · 用 AI 重新定义工作方式</p>
+    </footer>
+
+    <!-- Intersection Observer for scroll animations -->
+    <script>
+        // Typewriter effect
+        const TYPEWRITER_TEXT = '一个正在学习用 AI 重新定义工作方式的供应链产品经理。分享产品实战干货，记录从 0 到 1 的产品思考。';
+        const typewriterEl = document.getElementById('typewriter');
+        let charIndex = 0;
+
+        function typeNextChar() {
+            if (charIndex < TYPEWRITER_TEXT.length) {
+                const before = TYPEWRITER_TEXT.slice(0, charIndex);
+                const current = TYPEWRITER_TEXT.charAt(charIndex);
+                const cursor = '<span class="cursor"></span>';
+                typewriterEl.innerHTML = before + '<span style="color:#007AFF;font-weight:500">' + current + '</span>' + cursor;
+                charIndex++;
+                const delay = current.match(/[，。、：；！？\s]/) ? 150 : Math.random() * 40 + 30;
+                setTimeout(typeNextChar, delay);
+            } else {
+                typewriterEl.innerHTML = TYPEWRITER_TEXT + '<span class="cursor done"></span>';
+            }
+        }
+
+        // Start typewriter after a brief delay
+        setTimeout(typeNextChar, 600);
+
+        // Scroll animation
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+    </script>
+
+</body>
+</html>
