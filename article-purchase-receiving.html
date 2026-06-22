@@ -376,6 +376,49 @@
 
             <p>两层体系只描述结果，无法描述过程。</p>
 
+            <!-- SVG: 两层 vs 三层 对比图 -->
+            <div style="margin: 28px 0; text-align:center;">
+                <svg viewBox="0 0 700 280" style="width:100%;max-width:680px;height:auto;" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="0" y="0" width="340" height="260" rx="14" fill="#f8f8fa" stroke="#e8e8ed" stroke-width="1"/>
+                    <rect x="360" y="0" width="340" height="260" rx="14" fill="#f0f5ff" stroke="#d0dff5" stroke-width="1"/>
+
+                    <!-- 标题 -->
+                    <text x="170" y="32" text-anchor="middle" font-size="16" font-weight="600" fill="#1d1d1f">两层体系</text>
+                    <text x="530" y="32" text-anchor="middle" font-size="16" font-weight="600" fill="#1d1d1f">三层体系</text>
+
+                    <!-- 两层：三个盒子 + 箭头 -->
+                    <rect x="90" y="60" width="160" height="36" rx="8" fill="#1d1d1f"/>
+                    <text x="170" y="84" text-anchor="middle" font-size="13" fill="#fff" font-weight="500">采购订单</text>
+
+                    <!-- 箭头 -->
+                    <line x1="170" y1="96" x2="170" y2="128" stroke="#86868b" stroke-width="2" stroke-dasharray="4,3"/>
+                    <polygon points="170,132 166,124 174,124" fill="#86868b"/>
+
+                    <rect x="90" y="140" width="160" height="36" rx="8" fill="#86868b"/>
+                    <text x="170" y="164" text-anchor="middle" font-size="13" fill="#fff" font-weight="500">采购入库单</text>
+
+                    <!-- 说明 -->
+                    <text x="170" y="210" text-anchor="middle" font-size="12" fill="#86868b">管结果 · ❌ 管过程</text>
+
+                    <!-- 三层：三个盒子 + 箭头 -->
+                    <rect x="440" y="60" width="160" height="36" rx="8" fill="#1d1d1f"/>
+                    <text x="520" y="84" text-anchor="middle" font-size="13" fill="#fff" font-weight="500">采购订单</text>
+
+                    <line x1="520" y1="96" x2="520" y2="120" stroke="#86868b" stroke-width="2" stroke-dasharray="4,3"/>
+                    <polygon points="520,124 516,116 524,116" fill="#86868b"/>
+
+                    <rect x="440" y="132" width="160" height="36" rx="8" fill="#007AFF"/>
+                    <text x="520" y="156" text-anchor="middle" font-size="13" fill="#fff" font-weight="500">收货通知单</text>
+
+                    <line x1="520" y1="168" x2="520" y2="192" stroke="#86868b" stroke-width="2" stroke-dasharray="4,3"/>
+                    <polygon points="520,196 516,188 524,188" fill="#86868b"/>
+
+                    <rect x="440" y="204" width="160" height="36" rx="8" fill="#86868b"/>
+                    <text x="520" y="228" text-anchor="middle" font-size="13" fill="#fff" font-weight="500">采购入库单</text>
+                </svg>
+                <div style="font-size:12px;color:#86868b;margin-top:4px;">左侧管理结果，右侧管理过程</div>
+            </div>
+
             <hr>
 
             <h2>两层单据体系</h2>
@@ -474,6 +517,40 @@
             </div>
 
             <hr>
+
+            <!-- SVG: 未入库 300 问题 -->
+            <div style="margin: 28px 0; text-align:center;">
+                <svg viewBox="0 0 600 200" style="width:100%;max-width:600px;height:auto;" xmlns="http://www.w3.org/2000/svg">
+                    <!-- 左侧：两层视角 -->
+                    <rect x="0" y="0" width="285" height="180" rx="12" fill="#fff5f5" stroke="#ffd6d6" stroke-width="1"/>
+                    <text x="142" y="26" text-anchor="middle" font-size="14" font-weight="600" fill="#d93636">两层体系看到的是</text>
+
+                    <rect x="80" y="44" width="130" height="40" rx="8" fill="#d93636"/>
+                    <text x="145" y="70" text-anchor="middle" font-size="15" fill="#fff" font-weight="600">未入库：300</text>
+                    <text x="142" y="102" text-anchor="middle" font-size="12" fill="#d93636">一个数字，五种可能</text>
+
+                    <line x1="142" y1="112" x2="142" y2="128" stroke="#ffb3b3" stroke-width="1"/>
+                    <text x="142" y="148" text-anchor="middle" font-size="11" fill="#999">分不清是哪种情况</text>
+                    <text x="142" y="166" text-anchor="middle" font-size="11" fill="#999">采购和仓库都在猜</text>
+
+                    <!-- 右侧：三层视角 -->
+                    <rect x="315" y="0" width="285" height="180" rx="12" fill="#f0faf0" stroke="#b8e6b8" stroke-width="1"/>
+                    <text x="458" y="26" text-anchor="middle" font-size="14" font-weight="600" fill="#1a7a1a">三层体系拆开了</text>
+
+                    <rect x="340" y="44" width="235" height="120" rx="10" fill="#fff"/>
+                    <circle cx="370" cy="66" r="6" fill="#ffd700"/>
+                    <text x="385" y="71" font-size="12" fill="#1d1d1f">尚未发货：100</text>
+                    <circle cx="370" cy="92" r="6" fill="#ffa500"/>
+                    <text x="385" y="97" font-size="12" fill="#1d1d1f">在途运输中：100</text>
+                    <circle cx="370" cy="118" r="6" fill="#007AFF"/>
+                    <text x="385" y="123" font-size="12" fill="#1d1d1f">已到未处理：80</text>
+                    <circle cx="370" cy="144" r="6" fill="#d93636"/>
+                    <text x="385" y="149" font-size="12" fill="#1d1d1f">供应商少发：20</text>
+
+                    <text x="458" y="176" text-anchor="middle" font-size="11" fill="#1a7a1a">每个状态清晰可见</text>
+                </svg>
+                <div style="font-size:12px;color:#86868b;margin-top:4px;">左侧是两层体系看到的"黑盒"，右侧是三层体系拆解后的清晰视图</div>
+            </div>
 
             <h2>两层体系的隐藏问题</h2>
 
