@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>采购入库为什么需要"收货通知单"？ — PM琢玉</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, "SF Pro Display", "SF Pro Text", "Helvetica Neue", "PingFang SC", "Microsoft YaHei", sans-serif;
+            background-color: #f5f5f7;
+            color: #1d1d1f;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            line-height: 1.47059;
+            letter-spacing: -0.022em;
+        }
+
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            background: rgba(245, 245, 247, 0.8);
+            backdrop-filter: saturate(180%) blur(20px);
+            -webkit-backdrop-filter: saturate(180%) blur(20px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+        }
+
+        .nav-inner {
+            max-width: 780px;
+            margin: 0 auto;
+            padding: 0 22px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nav-logo {
+            font-size: 14px;
+            font-weight: 600;
+            color: #1d1d1f;
+            letter-spacing: -0.01em;
+        }
+
+        .nav-back a {
+            font-size: 12px;
+            font-weight: 400;
+            color: #007AFF;
+            text-decoration: none;
+            opacity: 0.8;
+            transition: opacity 0.2s;
+        }
+
+        .nav-back a:hover {
+            opacity: 1;
+        }
+
+        /* Article layout */
+        .article {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 100px 22px 60px;
+        }
+
+        .article-header {
+            margin-bottom: 48px;
+        }
+
+        .article-meta {
+            font-size: 13px;
+            font-weight: 500;
+            color: #86868b;
+            margin-bottom: 12px;
+        }
+
+        .article-title {
+            font-size: 40px;
+            font-weight: 700;
+            line-height: 1.1;
+            letter-spacing: -0.003em;
+            color: #1d1d1f;
+            margin-bottom: 16px;
+        }
+
+        .article-desc {
+            font-size: 17px;
+            font-weight: 400;
+            line-height: 1.381;
+            color: #6e6e73;
+        }
+
+        /* Article body */
+        .article-body {
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 1.8;
+            color: #1d1d1f;
+        }
+
+        .article-body h2 {
+            font-size: 26px;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-top: 56px;
+            margin-bottom: 16px;
+            color: #1d1d1f;
+        }
+
+        .article-body h3 {
+            font-size: 20px;
+            font-weight: 600;
+            line-height: 1.3;
+            margin-top: 36px;
+            margin-bottom: 12px;
+            color: #1d1d1f;
+        }
+
+        .article-body p {
+            margin-bottom: 16px;
+        }
+
+        .article-body strong {
+            font-weight: 600;
+            color: #1d1d1f;
+        }
+
+        .article-body blockquote {
+            border-left: 3px solid #007AFF;
+            padding: 12px 20px;
+            margin: 20px 0;
+            background: rgba(0, 122, 255, 0.04);
+            border-radius: 0 8px 8px 0;
+            font-size: 15px;
+            color: #1d1d1f;
+        }
+
+        .article-body blockquote p {
+            margin-bottom: 0;
+        }
+
+        .article-body ul, .article-body ol {
+            margin: 12px 0 16px 20px;
+        }
+
+        .article-body li {
+            margin-bottom: 8px;
+        }
+
+        /* Table */
+        .article-body .table-wrap {
+            overflow-x: auto;
+            margin: 20px 0;
+        }
+
+        .article-body table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .article-body table th {
+            background: #e8e8ed;
+            font-weight: 600;
+            padding: 12px 16px;
+            text-align: left;
+            color: #1d1d1f;
+            border-bottom: 2px solid #d2d2d7;
+        }
+
+        .article-body table td {
+            padding: 12px 16px;
+            border-bottom: 1px solid #e8e8ed;
+            color: #1d1d1f;
+        }
+
+        .article-body table tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* Divider */
+        .article-body hr {
+            border: none;
+            height: 1px;
+            background: #d2d2d7;
+            margin: 40px 0;
+        }
+
+        /* Separator line */
+        .article-body .sep {
+            text-align: center;
+            color: #d2d2d7;
+            font-size: 20px;
+            margin: 32px 0;
+            letter-spacing: 8px;
+        }
+
+        /* Code inline */
+        .article-body code {
+            font-family: "SF Mono", "Consolas", monospace;
+            font-size: 14px;
+            background: rgba(0, 0, 0, 0.04);
+            padding: 2px 6px;
+            border-radius: 4px;
+            color: #1d1d1f;
+        }
+
+        /* Arrow flow */
+        .arrow-flow {
+            text-align: center;
+            font-size: 18px;
+            font-weight: 500;
+            color: #007AFF;
+            margin: 20px 0;
+            padding: 16px;
+            background: rgba(0, 122, 255, 0.04);
+            border-radius: 12px;
+        }
+
+        /* Highlight box */
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(0, 122, 255, 0.06), rgba(88, 86, 214, 0.06));
+            border-radius: 16px;
+            padding: 24px;
+            margin: 24px 0;
+            border: 1px solid rgba(0, 122, 255, 0.1);
+        }
+
+        .highlight-box p {
+            margin-bottom: 0;
+            font-size: 15px;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 32px 22px;
+            border-top: 1px solid #d2d2d7;
+            max-width: 720px;
+            margin: 0 auto;
+        }
+
+        .footer p {
+            font-size: 12px;
+            font-weight: 400;
+            color: #86868b;
+        }
+
+        /* Responsive */
+        @media (max-width: 734px) {
+            .article-title {
+                font-size: 28px;
+            }
+            .article-body h2 {
+                font-size: 22px;
+            }
+            .article-body h3 {
+                font-size: 18px;
+            }
+            .article-body {
+                font-size: 15px;
+            }
+            .article-body table {
+                font-size: 13px;
+            }
+            .article-body table th,
+            .article-body table td {
+                padding: 10px 12px;
+            }
+            .highlight-box {
+                padding: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-inner">
+            <div class="nav-logo">PM琢玉</div>
+            <div class="nav-back"><a href="/">← 返回首页</a></div>
+        </div>
+    </nav>
+
+    <!-- Article -->
+    <article class="article">
+        <div class="article-header">
+            <div class="article-meta">2026 · 供应链 · ERP 产品设计</div>
+            <h1 class="article-title">采购入库已经做对了，<br>为什么还要多一张"收货通知单"？</h1>
+            <p class="article-desc">从两层单据到三层单据，看 ERP 采购履约的设计演进。</p>
+        </div>
+
+        <div class="article-body">
+
+            <h2>同一张采购订单，两个完全不同的故事</h2>
+
+            <p>采购员小A下单了 1,000 件牛奶，PO 审批通过。</p>
+
+            <p>小A觉得任务已经完成了：买什么、买多少、向谁买、什么价格——清清楚楚。</p>
+
+            <p>仓库小B刚安排完今天的收货计划，突然接到供应商送货消息：800 件牛奶到了。</p>
+
+            <p>小B当场懵了：</p>
+
+            <ul>
+                <li>这 800 件是哪个订单的？</li>
+                <li>剩下 200 件在哪？没发货？在路上？</li>
+                <li>今天到底该收多少才是对的？</li>
+                <li>库位要不要重新调？人手够不够？</li>
+            </ul>
+
+            <p><strong>同一张采购订单，在采购和仓库眼里，变成了完全不同的问题。</strong></p>
+
+            <p>小A看的是"买完了"，小B看的是"今天怎么收"。</p>
+
+            <hr>
+
+            <h2>问题本质：ERP 缺的不是单据，是"过程表达"</h2>
+
+            <p>仔细想想，传统两层体系是这样的：</p>
+
+            <div class="arrow-flow">采购订单 → 采购入库单</div>
+
+            <p>采购订单管商业承诺——买多少。入库单管执行结果——收多少。</p>
+
+            <p><strong>但中间那段——货怎么来的、分几批、什么时候到、物流怎么样——是缺失的。</strong></p>
+
+            <p>两层体系只描述结果，无法描述过程。</p>
+
+            <hr>
+
+            <h2>两层单据体系</h2>
+
+            <div class="arrow-flow">采购订单 → 采购入库单</div>
+
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>维度</th>
+                            <th>内容</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>核心逻辑</td>
+                            <td>采购订单管买什么、买多少；入库单管实际收了多少</td>
+                        </tr>
+                        <tr>
+                            <td>适用场景</td>
+                            <td>单次到货、业务简单、无需在途管理、无供应商协同、无 WMS</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <p>表面看够简单够用，但当企业规模变大，问题就暴露了。</p>
+
+            <hr>
+
+            <h2>三层单据体系</h2>
+
+            <div class="arrow-flow">采购订单 → 收货通知单 → 采购入库单</div>
+
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>维度</th>
+                            <th>内容</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>核心逻辑</td>
+                            <td>采购订单管承诺（应该采购多少）；收货通知单管过程（本次预计送来多少）；入库单管结果（实际收到多少）</td>
+                        </tr>
+                        <tr>
+                            <td>本质区别</td>
+                            <td>两层体系管理"结果"，三层体系管理"过程"</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <hr>
+
+            <h2>三张单据分别解决什么问题</h2>
+
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>单据</th>
+                            <th>核心问题</th>
+                            <th>数量口径</th>
+                            <th>使用角色</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>采购订单</td>
+                            <td>企业承诺采购什么</td>
+                            <td>计划数量</td>
+                            <td>采购、审批、供应商</td>
+                        </tr>
+                        <tr>
+                            <td>收货通知单</td>
+                            <td>本次预计送来什么</td>
+                            <td>发货/到货批次数量</td>
+                            <td>采购、仓库、供应商</td>
+                        </tr>
+                        <tr>
+                            <td>采购入库单</td>
+                            <td>实际收到什么</td>
+                            <td>实收/合格数量</td>
+                            <td>仓库、财务</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="highlight-box">
+                <p><strong>一句话：</strong>采购订单管"买多少"，收货通知单管"这次来多少"，采购入库单管"实际收多少"。</p>
+            </div>
+
+            <hr>
+
+            <h2>两层体系的隐藏问题</h2>
+
+            <p>还是 1,000 件牛奶。系统显示已入库 700、未入库 300。</p>
+
+            <p>但这 300 是没发、在路上、到了没处理、还是供应商少发了？</p>
+
+            <p><strong>两层体系把不同业务状态压缩成了一个数字。</strong> 这个数字叫"未入库"，背后可能是五种完全不同的情况。</p>
+
+            <hr>
+
+            <h2>三层体系登场：收货通知单解决了什么</h2>
+
+            <h3>1. 拆解履约批次</h3>
+            <p>一单多次发、多单合并到——每一批货都有据可查。</p>
+
+            <h3>2. 告诉仓库今天会来什么</h3>
+            <p>到货时间、车牌、司机、箱数——仓库拿到单子就知道怎么排。不用再猜。</p>
+
+            <h3>3. 让在途变得可见</h3>
+            <p>已入库、在途、未发货——三层体系把"混合状态"拆成了清晰刻度。</p>
+
+            <h3>4. 仓库从被动变计划</h3>
+            <p>月台安排、人力调度、库位预留——有了预期，才能做计划。</p>
+
+            <hr>
+
+            <h2>两层 vs 三层：核心差异</h2>
+
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>维度</th>
+                            <th>两层体系</th>
+                            <th>三层体系</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>管理什么</td>
+                            <td>结果</td>
+                            <td>过程</td>
+                        </tr>
+                        <tr>
+                            <td>未入库状态</td>
+                            <td>一个数字</td>
+                            <td>可追踪</td>
+                        </tr>
+                        <tr>
+                            <td>仓库收货</td>
+                            <td>被动接货</td>
+                            <td>计划收货</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="highlight-box">
+                <p><strong>两层体系回答"有没有收完"，三层体系回答"正在发生什么"。</strong></p>
+            </div>
+
+            <hr>
+
+            <h2>是不是所有企业都需要三层？</h2>
+
+            <p><strong>不需要的情况：</strong>小企业、单次收货、无物流复杂度、无 WMS——两层够了。</p>
+
+            <p><strong>需要的情况：</strong>分批发货、多仓库、物流复杂、供应商多、需要在途库存、对接 WMS——三层是刚需。</p>
+
+            <p>不是每一家企业都需要三层。但当上面的场景出现后，<strong>两层体系会把所有"异常"压成一个数字，而三层体系把它们变成了可管理的流程。</strong></p>
+
+            <hr>
+
+            <h2>多一层不是多一张单据，是多一层建模能力</h2>
+
+            <p>三层结构的本质：</p>
+
+            <ul>
+                <li><strong>采购订单：承诺层</strong>——管"买多少"</li>
+                <li><strong>收货通知单：过程层</strong>——管"这次来多少"</li>
+                <li><strong>采购入库单：结果层</strong>——管"实际收了多少"</li>
+            </ul>
+
+            <div class="highlight-box">
+                <p><strong>不是多了一张单据，而是多了一层"履约过程表达能力"。</strong></p>
+            </div>
+
+            <hr>
+
+            <h2>结尾</h2>
+
+            <p>当你只看采购入库单，你看到的是结果。</p>
+
+            <p>当你引入收货通知单，你看到的是过程。</p>
+
+            <p><strong>两层体系管理结果，三层体系管理真实业务过程。</strong></p>
+
+        </div>
+    </article>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>© 2026 PM琢玉 · 用 AI 重新定义工作方式</p>
+    </footer>
+
+</body>
+</html>
