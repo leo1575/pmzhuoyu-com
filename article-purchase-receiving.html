@@ -5,16 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>采购入库为什么需要"收货通知单"？ — PM琢玉</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        :root {
+            --bg: #f5f5f7;
+            --card: #ffffff;
+            --text: #1d1d1f;
+            --text-secondary: #6e6e73;
+            --text-muted: #86868b;
+            --accent: #007AFF;
+            --accent-light: rgba(0, 122, 255, 0.06);
+            --border: #d2d2d7;
+            --border-light: #e8e8ed;
         }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             font-family: -apple-system, "SF Pro Display", "SF Pro Text", "Helvetica Neue", "PingFang SC", "Microsoft YaHei", sans-serif;
-            background-color: #f5f5f7;
-            color: #1d1d1f;
+            background-color: var(--bg);
+            color: var(--text);
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
             line-height: 1.47059;
@@ -47,115 +55,139 @@
         .nav-logo {
             font-size: 14px;
             font-weight: 600;
-            color: #1d1d1f;
+            color: var(--text);
             letter-spacing: -0.01em;
         }
 
         .nav-back a {
             font-size: 12px;
             font-weight: 400;
-            color: #007AFF;
+            color: var(--accent);
             text-decoration: none;
             opacity: 0.8;
             transition: opacity 0.2s;
         }
 
-        .nav-back a:hover {
-            opacity: 1;
+        .nav-back a:hover { opacity: 1; }
+
+        /* Article layout — white card on gray bg */
+        .article-wrap {
+            max-width: 780px;
+            margin: 0 auto;
+            padding: 88px 22px 60px;
         }
 
-        /* Article layout */
-        .article {
-            max-width: 720px;
-            margin: 0 auto;
-            padding: 100px 22px 60px;
+        .article-card {
+            background: var(--card);
+            border-radius: 16px;
+            padding: 48px 56px;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
         }
 
         .article-header {
-            margin-bottom: 48px;
+            margin-bottom: 40px;
+            padding-bottom: 24px;
+            border-bottom: 1px solid var(--border-light);
         }
 
         .article-meta {
             font-size: 13px;
             font-weight: 500;
-            color: #86868b;
+            color: var(--text-muted);
             margin-bottom: 12px;
         }
 
+        .article-meta .tag {
+            font-size: 11px;
+            color: var(--accent);
+            background: rgba(0, 122, 255, 0.08);
+            padding: 2px 10px;
+            border-radius: 10px;
+            margin-left: 4px;
+        }
+
         .article-title {
-            font-size: 40px;
+            font-size: 32px;
             font-weight: 700;
-            line-height: 1.1;
+            line-height: 1.2;
             letter-spacing: -0.003em;
-            color: #1d1d1f;
-            margin-bottom: 16px;
+            color: var(--text);
+            margin-bottom: 12px;
         }
 
         .article-desc {
-            font-size: 17px;
+            font-size: 16px;
             font-weight: 400;
-            line-height: 1.381;
-            color: #6e6e73;
+            line-height: 1.6;
+            color: var(--text-secondary);
         }
 
         /* Article body */
         .article-body {
             font-size: 16px;
             font-weight: 400;
-            line-height: 1.8;
-            color: #1d1d1f;
+            line-height: 1.9;
+            color: var(--text);
         }
 
         .article-body h2 {
-            font-size: 26px;
+            font-size: 22px;
             font-weight: 700;
-            line-height: 1.2;
-            margin-top: 56px;
-            margin-bottom: 16px;
-            color: #1d1d1f;
+            line-height: 1.3;
+            margin-top: 44px;
+            margin-bottom: 14px;
+            color: var(--text);
+        }
+
+        .article-body h2:first-child {
+            margin-top: 0;
         }
 
         .article-body h3 {
-            font-size: 20px;
+            font-size: 18px;
             font-weight: 600;
-            line-height: 1.3;
-            margin-top: 36px;
-            margin-bottom: 12px;
-            color: #1d1d1f;
+            line-height: 1.4;
+            margin-top: 28px;
+            margin-bottom: 10px;
+            color: var(--text);
         }
 
         .article-body p {
-            margin-bottom: 16px;
+            margin: 14px 0;
+            line-height: 1.9;
         }
 
         .article-body strong {
             font-weight: 600;
-            color: #1d1d1f;
+            color: var(--text);
         }
 
         .article-body blockquote {
-            border-left: 3px solid #007AFF;
+            border-left: 3px solid var(--accent);
             padding: 12px 20px;
             margin: 20px 0;
-            background: rgba(0, 122, 255, 0.04);
+            background: var(--accent-light);
             border-radius: 0 8px 8px 0;
             font-size: 15px;
-            color: #1d1d1f;
+            color: var(--text);
+            line-height: 1.7;
         }
 
         .article-body blockquote p {
-            margin-bottom: 0;
+            margin: 0;
         }
 
         .article-body ul, .article-body ol {
-            margin: 12px 0 16px 20px;
+            margin: 10px 0;
+            padding-left: 22px;
         }
 
         .article-body li {
-            margin-bottom: 8px;
+            margin: 6px 0;
+            line-height: 1.9;
         }
 
-        /* Table */
+        /* Tables */
         .article-body .table-wrap {
             overflow-x: auto;
             margin: 20px 0;
@@ -165,106 +197,103 @@
             width: 100%;
             border-collapse: collapse;
             font-size: 14px;
-            line-height: 1.5;
+            line-height: 1.6;
         }
 
         .article-body table th {
-            background: #e8e8ed;
+            background: #f5f5f7;
             font-weight: 600;
-            padding: 12px 16px;
+            padding: 10px 14px;
             text-align: left;
-            color: #1d1d1f;
-            border-bottom: 2px solid #d2d2d7;
+            color: var(--text);
+            border: 1px solid var(--border-light);
         }
 
         .article-body table td {
-            padding: 12px 16px;
-            border-bottom: 1px solid #e8e8ed;
-            color: #1d1d1f;
+            padding: 10px 14px;
+            border: 1px solid var(--border-light);
+            color: var(--text);
         }
 
         .article-body table tr:last-child td {
-            border-bottom: none;
+            border-bottom: 1px solid var(--border-light);
         }
 
         /* Divider */
         .article-body hr {
             border: none;
             height: 1px;
-            background: #d2d2d7;
-            margin: 40px 0;
-        }
-
-        /* Separator line */
-        .article-body .sep {
-            text-align: center;
-            color: #d2d2d7;
-            font-size: 20px;
-            margin: 32px 0;
-            letter-spacing: 8px;
+            background: var(--border-light);
+            margin: 36px 0;
         }
 
         /* Code inline */
         .article-body code {
-            font-family: "SF Mono", "Consolas", monospace;
+            font-family: "SF Mono", "Consolas", "Menlo", monospace;
             font-size: 14px;
             background: rgba(0, 0, 0, 0.04);
             padding: 2px 6px;
             border-radius: 4px;
-            color: #1d1d1f;
+            color: var(--text);
         }
 
         /* Arrow flow */
         .arrow-flow {
             text-align: center;
-            font-size: 18px;
-            font-weight: 500;
-            color: #007AFF;
-            margin: 20px 0;
-            padding: 16px;
-            background: rgba(0, 122, 255, 0.04);
-            border-radius: 12px;
+            font-size: 17px;
+            font-weight: 600;
+            color: var(--accent);
+            margin: 18px 0;
+            padding: 14px 20px;
+            background: var(--accent-light);
+            border-radius: 10px;
+            letter-spacing: 1px;
         }
 
         /* Highlight box */
         .highlight-box {
             background: linear-gradient(135deg, rgba(0, 122, 255, 0.06), rgba(88, 86, 214, 0.06));
-            border-radius: 16px;
-            padding: 24px;
+            border-radius: 14px;
+            padding: 22px 26px;
             margin: 24px 0;
-            border: 1px solid rgba(0, 122, 255, 0.1);
+            border: 1px solid rgba(0, 122, 255, 0.12);
         }
 
         .highlight-box p {
-            margin-bottom: 0;
+            margin: 0;
             font-size: 15px;
+            line-height: 1.7;
         }
 
         /* Footer */
         .footer {
             text-align: center;
             padding: 32px 22px;
-            border-top: 1px solid #d2d2d7;
-            max-width: 720px;
+            border-top: 1px solid var(--border-light);
+            max-width: 780px;
             margin: 0 auto;
         }
 
         .footer p {
             font-size: 12px;
             font-weight: 400;
-            color: #86868b;
+            color: var(--text-muted);
         }
 
         /* Responsive */
         @media (max-width: 734px) {
+            .article-card {
+                padding: 24px 20px;
+                border-radius: 12px;
+            }
             .article-title {
-                font-size: 28px;
+                font-size: 24px;
             }
             .article-body h2 {
-                font-size: 22px;
+                font-size: 20px;
             }
             .article-body h3 {
-                font-size: 18px;
+                font-size: 17px;
             }
             .article-body {
                 font-size: 15px;
@@ -274,10 +303,19 @@
             }
             .article-body table th,
             .article-body table td {
-                padding: 10px 12px;
+                padding: 8px 10px;
             }
             .highlight-box {
-                padding: 16px;
+                padding: 16px 18px;
+            }
+            .article-wrap {
+                padding: 80px 14px 40px;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .article-title {
+                font-size: 21px;
             }
         }
     </style>
@@ -293,9 +331,10 @@
     </nav>
 
     <!-- Article -->
-    <article class="article">
+    <div class="article-wrap">
+        <div class="article-card">
         <div class="article-header">
-            <div class="article-meta">2026 · 供应链 · ERP 产品设计</div>
+            <div class="article-meta">2026 · <span class="tag">ERP</span> <span class="tag">供应链</span> <span class="tag">产品设计</span></div>
             <h1 class="article-title">采购入库已经做对了，<br>为什么还要多一张"收货通知单"？</h1>
             <p class="article-desc">从两层单据到三层单据，看 ERP 采购履约的设计演进。</p>
         </div>
@@ -534,7 +573,8 @@
             <p><strong>两层体系管理结果，三层体系管理真实业务过程。</strong></p>
 
         </div>
-    </article>
+        </div>
+    </div>
 
     <!-- Footer -->
     <footer class="footer">
