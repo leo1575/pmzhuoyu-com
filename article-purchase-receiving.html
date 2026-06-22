@@ -385,49 +385,6 @@
 
             <p>于是系统只能回答"收了多少"，却无法回答"这批货到底发生了什么"。</p>
 
-            <!-- SVG: 两层 vs 三层 对比图 -->
-            <div style="margin: 28px 0; text-align:center;">
-                <svg viewBox="0 0 700 280" style="width:100%;max-width:680px;height:auto;" xmlns="http://www.w3.org/2000/svg">
-                    <rect x="0" y="0" width="340" height="260" rx="14" fill="#f8f8fa" stroke="#e8e8ed" stroke-width="1"/>
-                    <rect x="360" y="0" width="340" height="260" rx="14" fill="#f0f5ff" stroke="#d0dff5" stroke-width="1"/>
-
-                    <!-- 标题 -->
-                    <text x="170" y="32" text-anchor="middle" font-size="16" font-weight="600" fill="#1d1d1f">两层体系</text>
-                    <text x="530" y="32" text-anchor="middle" font-size="16" font-weight="600" fill="#1d1d1f">三层体系</text>
-
-                    <!-- 两层：三个盒子 + 箭头 -->
-                    <rect x="90" y="60" width="160" height="36" rx="8" fill="#1d1d1f"/>
-                    <text x="170" y="84" text-anchor="middle" font-size="13" fill="#fff" font-weight="500">采购订单</text>
-
-                    <!-- 箭头 -->
-                    <line x1="170" y1="96" x2="170" y2="128" stroke="#86868b" stroke-width="2" stroke-dasharray="4,3"/>
-                    <polygon points="170,132 166,124 174,124" fill="#86868b"/>
-
-                    <rect x="90" y="140" width="160" height="36" rx="8" fill="#86868b"/>
-                    <text x="170" y="164" text-anchor="middle" font-size="13" fill="#fff" font-weight="500">采购入库单</text>
-
-                    <!-- 说明 -->
-                    <text x="170" y="210" text-anchor="middle" font-size="12" fill="#86868b">管结果 · ❌ 管过程</text>
-
-                    <!-- 三层：三个盒子 + 箭头 -->
-                    <rect x="440" y="60" width="160" height="36" rx="8" fill="#1d1d1f"/>
-                    <text x="520" y="84" text-anchor="middle" font-size="13" fill="#fff" font-weight="500">采购订单</text>
-
-                    <line x1="520" y1="96" x2="520" y2="120" stroke="#86868b" stroke-width="2" stroke-dasharray="4,3"/>
-                    <polygon points="520,124 516,116 524,116" fill="#86868b"/>
-
-                    <rect x="440" y="132" width="160" height="36" rx="8" fill="#007AFF"/>
-                    <text x="520" y="156" text-anchor="middle" font-size="13" fill="#fff" font-weight="500">收货通知单</text>
-
-                    <line x1="520" y1="168" x2="520" y2="192" stroke="#86868b" stroke-width="2" stroke-dasharray="4,3"/>
-                    <polygon points="520,196 516,188 524,188" fill="#86868b"/>
-
-                    <rect x="440" y="204" width="160" height="36" rx="8" fill="#86868b"/>
-                    <text x="520" y="228" text-anchor="middle" font-size="13" fill="#fff" font-weight="500">采购入库单</text>
-                </svg>
-                <div style="font-size:12px;color:#86868b;margin-top:4px;">左侧管理结果，右侧管理过程</div>
-            </div>
-
             <hr>
 
             <h2>两层单据体系：为什么看起来够用</h2>
