@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI让执行变快了，但也更容易让人变成"任务分发员" — PM琢玉</title>
+    <style>
+        :root { --bg: #f5f5f7; --card: #ffffff; --text: #1d1d1f; --text-secondary: #6e6e73; --text-muted: #86868b; --accent: #007AFF; --accent-light: rgba(0,122,255,0.06); --border-light: #e8e8ed; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system,"SF Pro Display","SF Pro Text","Helvetica Neue","PingFang SC","Microsoft YaHei",sans-serif; background-color: var(--bg); color: var(--text); -webkit-font-smoothing: antialiased; line-height: 1.47059; letter-spacing: -0.022em; }
+        .nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(245,245,247,0.8); backdrop-filter: saturate(180%) blur(20px); -webkit-backdrop-filter: saturate(180%) blur(20px); border-bottom: 1px solid rgba(0,0,0,0.08); }
+        .nav-inner { max-width: 780px; margin: 0 auto; padding: 0 22px; height: 48px; display: flex; align-items: center; justify-content: space-between; }
+        .nav-logo { font-size: 14px; font-weight: 600; color: var(--text); }
+        .nav-back a { font-size: 12px; color: var(--accent); text-decoration: none; opacity: 0.8; }
+        .nav-back a:hover { opacity: 1; }
+        .article-wrap { max-width: 780px; margin: 0 auto; padding: 88px 22px 60px; }
+        .article-card { background: var(--card); border-radius: 16px; padding: 48px 56px; box-shadow: 0 1px 4px rgba(0,0,0,0.06); }
+        .article-header { margin-bottom: 40px; padding-bottom: 24px; border-bottom: 1px solid var(--border-light); }
+        .article-meta { font-size: 13px; font-weight: 500; color: var(--text-muted); margin-bottom: 12px; }
+        .article-meta .tag { font-size: 11px; color: var(--accent); background: rgba(0,122,255,0.08); padding: 2px 10px; border-radius: 10px; margin-left: 4px; }
+        .article-title { font-size: 32px; font-weight: 700; line-height: 1.2; color: var(--text); margin-bottom: 12px; }
+        .article-desc { font-size: 16px; font-weight: 400; line-height: 1.6; color: var(--text-secondary); }
+        .article-body { font-size: 16px; font-weight: 400; line-height: 1.9; color: var(--text); }
+        .article-body h2 { font-size: 22px; font-weight: 700; line-height: 1.3; margin-top: 44px; margin-bottom: 14px; color: var(--text); }
+        .article-body p { margin: 14px 0; line-height: 1.9; }
+        .article-body strong { font-weight: 600; color: var(--text); }
+        .article-body ul { margin: 10px 0; padding-left: 22px; }
+        .article-body li { margin: 6px 0; line-height: 1.9; }
+        .article-body .table-wrap { overflow-x: auto; margin: 20px 0; }
+        .article-body table { width: 100%; border-collapse: collapse; font-size: 14px; line-height: 1.6; }
+        .article-body table th { background: #f5f5f7; font-weight: 600; padding: 10px 14px; text-align: left; color: var(--text); border: 1px solid var(--border-light); }
+        .article-body table td { padding: 10px 14px; border: 1px solid var(--border-light); color: var(--text); }
+        .article-body hr { border: none; height: 1px; background: var(--border-light); margin: 36px 0; }
+        .highlight-box { background: linear-gradient(135deg, rgba(0,122,255,0.06), rgba(88,86,214,0.06)); border-radius: 14px; padding: 22px 26px; margin: 24px 0; border: 1px solid rgba(0,122,255,0.12); }
+        .highlight-box p { margin: 0; font-size: 15px; line-height: 1.7; }
+        .footer { text-align: center; padding: 32px 22px; border-top: 1px solid var(--border-light); max-width: 780px; margin: 0 auto; }
+        .footer p { font-size: 12px; font-weight: 400; color: var(--text-muted); }
+        @media (max-width: 734px) { .article-card { padding: 24px 20px; border-radius: 12px; } .article-title { font-size: 24px; } .article-body h2 { font-size: 20px; } .article-body { font-size: 15px; } .article-body table { font-size: 13px; } .article-body table th, .article-body table td { padding: 8px 10px; } .highlight-box { padding: 16px 18px; } .article-wrap { padding: 80px 14px 40px; } }
+    </style>
+</head>
+<body>
+    <nav class="nav"><div class="nav-inner"><div class="nav-logo">PM琢玉</div><div class="nav-back"><a href="/">← 返回首页</a></div></div></nav>
+    <div class="article-wrap"><div class="article-card">
+    <div class="article-header">
+        <div class="article-meta">2026 · <span class="tag">AI</span> <span class="tag">产品经理</span> <span class="tag">效率</span></div>
+        <h1 class="article-title">AI 让执行变快了，但也更容易让人变成"任务分发员"</h1>
+        <p class="article-desc">效率暴涨的真实感受，和一个正在被验证的判断。</p>
+    </div>
+    <div class="article-body">
+
+<h2>最近的一个明显感受</h2>
+
+<p>我最近在用各种 AI IDE 和 Agent 输出 PRD 套件，也在尝试用 Vibe Coding 做前端原型。</p>
+
+<p>刚开始确实有一种效率暴涨的感觉。</p>
+
+<p>我把任务丢给几个 AI，一个在写需求 A 的 PRD，一个在整理需求 B 的字段，一个在生成需求 C 的页面，一个在改代码。这个做完了，切过去补下一步要求；另一个完成了，继续追问。</p>
+
+<p>表面看，我变成了一个"多线程产品经理"。</p>
+
+<p>但用了一段时间后，我发现一个问题：我很容易沉浸在任务流转里，以为自己在高效工作，其实很多时候只是在做任务分发和结果搬运。</p>
+
+<p><strong>如果只是不断给 AI 派活、接结果、再派活，那人的价值会被压缩到很低。因为这件事只要经过简单培训，很多人都能做。</strong></p>
+
+<hr>
+
+<h2>AI 确实能产出不错的东西了</h2>
+
+<p>先不急着批判，得承认 AI 的能力。</p>
+
+<p>现在的 AI IDE 和 Agent，已经不是只能写几段辅助文本的工具了。只要背景资料足够完整，约束说得清楚，输出结构明确，它确实能产出一套看起来很像样的 PRD、页面说明、字段表、接口说明，甚至能继续生成前端项目。</p>
+
+<div class="table-wrap">
+<table>
+    <thead><tr><th>过去的产品工作</th><th>现在 AI 介入后的变化</th></tr></thead>
+    <tbody>
+        <tr><td>产品经理自己从零写文档</td><td>AI 可根据输入快速生成初稿</td></tr>
+        <tr><td>原型需要手工画很久</td><td>Vibe Coding 可快速搭出可交互页面</td></tr>
+        <tr><td>字段、流程、异常场景靠人逐项补</td><td>AI 可帮助批量展开</td></tr>
+        <tr><td>文档修改成本高</td><td>多轮迭代变得更快</td></tr>
+    </tbody>
+</table>
+</div>
+
+<p>但这里有个关键区别：<strong>AI 能替代很多"写出来"的动作，但很难替代"判断什么该被写进去"的能力。</strong></p>
+
+<hr>
+
+<h2>人的第一个核心价值：把输入变成可复用的业务资产</h2>
+
+<p>我现在越来越觉得，给 AI 的输入不能只看成一次性 Prompt，也不能只看成"这次任务的背景资料"。</p>
+
+<p>对产品经理来说，前期收集到的业务背景、现状问题、系统边界、流程规则、字段口径、历史包袱，本来就不应该只服务于某一份 PRD。它应该被整理成公司可复用的业务上下文。</p>
+
+<div class="table-wrap">
+<table>
+    <thead><tr><th>资产类型</th><th>内容示例</th><th>后续价值</th></tr></thead>
+    <tbody>
+        <tr><td>业务背景文档</td><td>公司业务模式、组织分工、核心流程</td><td>新项目快速理解上下文</td></tr>
+        <tr><td>现状总结</td><td>当前系统怎么跑、有哪些绕路操作</td><td>后续需求评估不重复调研</td></tr>
+        <tr><td>业务对象说明</td><td>商品、门店、仓库、供应商、订单等</td><td>统一系统语言</td></tr>
+        <tr><td>单据流说明</td><td>采购单、入库单、调拨单等关系</td><td>支持 PRD、接口、测试设计</td></tr>
+        <tr><td>异常场景库</td><td>缺货、超收、撤单、冲销、改单</td><td>提高 AI 输出质量</td></tr>
+        <tr><td>前端规范</td><td>页面结构、按钮规则、表格规范</td><td>支持 Vibe Coding 稳定输出</td></tr>
+    </tbody>
+</table>
+</div>
+
+<p><strong>真正重要的不是"我这次怎么把 AI 问好"，而是"我能不能把公司业务整理成 AI 以后也能反复使用的上下文"。</strong></p>
+
+<p>Prompt 是一次性的，但文档是可积累的。</p>
+
+<hr>
+
+<h2>人的第二个核心价值：对 AI 输出保持审阅耐心</h2>
+
+<p>AI 很容易生成一份"看起来很完整"的长文档。它会有标题、有表格、有流程、有异常场景，看上去甚至比很多人写得还规整。</p>
+
+<p>但问题也在这里：越是长篇大论，越容易把人骗过去。</p>
+
+<p>审阅不是检查错别字，而是做产品判断。尤其是做 PRD 套件时，AI 输出的问题往往不是明显错误，而是这些：</p>
+
+<ul>
+    <li>业务对象混用</li>
+    <li>状态流前后不一致</li>
+    <li>字段口径不清楚</li>
+    <li>异常场景只写了表面</li>
+    <li>权限边界没讲透</li>
+    <li>页面规则和业务规则脱节</li>
+    <li>接口字段和前端字段对不上</li>
+    <li>用通用系统逻辑覆盖了公司真实现状</li>
+</ul>
+
+<p>AI 生成文档后，人如果没有耐心审阅，后面的 Vibe Coding 一定会付出代价。前面省下来的时间，很可能会在原型返工里加倍还回去。</p>
+
+<p><strong>AI 可以生成一份很完整的文档，但它没有真正的业务责任，也不会替你承担取舍结果。</strong></p>
+
+<hr>
+
+<h2>Vibe Coding 前，结构化文档比对话更重要</h2>
+
+<p>我以前也会犯一个错误：前端项目生成后，看到哪里不对，就直接跟 AI 说"这里改一下""那里调整一下"。</p>
+
+<p>短期看能动，长期看很低效。</p>
+
+<p>因为很多问题不是某个按钮、某个间距、某个表格字段的问题，而是前端规范和页面结构一开始就没喂清楚。</p>
+
+<p>我的经验是：</p>
+
+<ol>
+    <li><strong>先改业务上下文文档</strong></li>
+    <li><strong>再改 PRD 结构文档</strong></li>
+    <li><strong>再改前端规范文档</strong></li>
+    <li><strong>再让 AI 基于规范重新调整项目</strong></li>
+    <li><strong>最后才进入局部细节优化</strong></li>
+</ol>
+
+<p><strong>不要一上来就和 AI 碎片化聊天。</strong>结构性问题靠聊天补，成本很高，也很难复用。</p>
+
+<hr>
+
+<h2>应该形成可迭代的工作包</h2>
+
+<p>我现在更倾向于把 AI 协作拆成两类文件：</p>
+
+<div class="table-wrap">
+<table>
+    <thead><tr><th>文件类型</th><th>作用</th></tr></thead>
+    <tbody>
+        <tr><td>背景上下文</td><td>告诉 AI 公司是什么、业务怎么跑、系统边界在哪</td></tr>
+        <tr><td>需求说明</td><td>告诉 AI 这次要解决什么问题</td></tr>
+        <tr><td>业务规则</td><td>告诉 AI 哪些判断不能错</td></tr>
+        <tr><td>页面规范</td><td>告诉 AI 页面应该长什么样、怎么交互</td></tr>
+        <tr><td>字段规范</td><td>告诉 AI 字段名称、来源、口径、是否必填</td></tr>
+        <tr><td>验收标准</td><td>告诉 AI 什么叫做完成</td></tr>
+    </tbody>
+</table>
+</div>
+
+<p>Prompt 是一次性的，但文档是可积累的。<strong>真正有价值的 AI 工作流，应该让每一次项目产出都反过来增强下一次输入。</strong></p>
+
+<hr>
+
+<p>这段时间用 AI IDE 和 Agent，我最大的感受不是"产品经理会不会被替代"，而是"产品经理会不会主动把自己降级"。</p>
+
+<p>如果我们只是把需求丢给 AI，再把 AI 结果转发出去，那确实很容易被替代。</p>
+
+<p><strong>但如果我们能把业务背景整理清楚，把历史经验变成资产，把 AI 输出逐项审阅，把结构性问题前置解决——那产品经理的价值反而会更清楚。</strong></p>
+
+<p>AI 擅长生成，人更应该负责判断。</p>
+
+    </div>
+    </div></div>
+    <footer class="footer"><p>© 2026 PM琢玉 · 用 AI 重新定义工作方式</p></footer>
+</body>
+</html>
