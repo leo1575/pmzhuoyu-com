@@ -2,7 +2,7 @@
 
 ## 最近的一个明显感受
 
-我最近在用各种 AI IDE 和 Agent 输出 PRD 套件，以及用 Vibe Coding 做前端原型。
+最近用各种 AI IDE 和 Agent 输出 PRD 套件，以及用 Vibe Coding 做前端原型。
 
 刚开始确实有一种效率暴涨的感觉。
 
